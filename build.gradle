@@ -1,9 +1,25 @@
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'checkstyle'
-apply plugin: 'jacoco'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.4.0'
+    }
+}
 
-mainClassName = 'org.fundacionjala.prog101CoffeeMaker.Main'
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'info.solidsoft.pitest' version '1.4.0'
+}
+
+group 'Coffee'
+version '1.0'
+
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -11,10 +27,8 @@ repositories {
 
 dependencies {
     testImplementation 'junit:junit:4.12'
-//    // https://mvnrepository.com/artifact/com.sikulix/sikulixapi
-//    implementation group: 'com.sikulix', name: 'sikulixapi', version: '2.0.0'
-// https://mvnrepository.com/artifact/com.sikulix/sikulixapi
     implementation group: 'com.sikulix', name: 'sikulixapi', version: '2.0.4'
+    testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.6.0'
 }
 
 test {
@@ -27,27 +41,40 @@ test {
 jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['org/fundacionjala/prog101CoffeeMaker/**'])
+            fileTree(dir: it, exclude: [])
         }))
     }
 }
-
 checkstyle {
     toolVersion '8.34'
     configFile file('config/checkstyle/checkstyle.xml')
     checkstyleMain.source = "src/main/"
     checkstyleMain.excludes = ["**/src/test/**"]
 }
-
 checkstyleMain {
     source = 'src/main/java'
 }
-
+run{
+    standardInput = System.in
+}
 checkstyleTest {
     source = 'src/main/java'
 }
-
 check.dependsOn jacocoTestReport
 
 test.finalizedBy("checkstyleMain")
 test.finalizedBy("jacocoTestReport")
+
+javafx {
+    modules = [ 'javafx.controls' , 'javafx.fxml' , 'javafx.media' ]
+    version = '11.0.2'
+}
+
+mainClassName = 'Main'
+
+pitest {
+    targetClasses = ['org.fundacionjala.prog101CoffeeMaker.coffeeMaker.*']
+    targetTests = ['org.fundacionjala.prog101CoffeeMaker.coffeeMaker.*']
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+}
