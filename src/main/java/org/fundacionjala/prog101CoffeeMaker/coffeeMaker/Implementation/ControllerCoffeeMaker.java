@@ -53,7 +53,6 @@ public class ControllerCoffeeMaker {
                     intermittencePlateHeater();
                     tic /= numberHundred;
                 }
-
                 tic += 1;
             }
         };
@@ -204,5 +203,21 @@ public class ControllerCoffeeMaker {
      */
     public void exit() {
         System.exit(0);
+    }
+
+    /**
+     * .
+     * @return
+     */
+    public CoffeeMaker getCoffeeMaker() {
+        return coffeeMaker;
+    }
+
+    /**
+     * .
+     * @param coffeeMakerNew
+     */
+    public void setCoffeeMaker(final CoffeeMaker coffeeMakerNew) {
+        this.coffeeMaker = coffeeMakerNew;
     }
 }

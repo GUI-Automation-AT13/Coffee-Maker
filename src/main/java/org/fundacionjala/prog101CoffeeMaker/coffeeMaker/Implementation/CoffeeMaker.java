@@ -249,4 +249,19 @@ public class CoffeeMaker {
         plateSensor.setState(false);
     }
 
+    /**
+     * .
+     * @return
+     */
+    public Pot getPot() {
+        return pot;
+    }
+
+    /**
+     *
+     * @param potNew
+     */
+    public void setPot(final Pot potNew) {
+        this.pot = potNew;
+    }
 }

@@ -1,5 +1,6 @@
 package org.fundacionjala.prog101CoffeeMaker.coffeeMaker.Implementation;
 
+import org.fundacionjala.prog101CoffeeMaker.coffeeMaker.Pot.Pot;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -90,4 +91,53 @@ public class ControllerCoffeeMakerTest {
         String actual = controllerCoffeeMaker.printForInterface();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void controllerCoffeeMakerTest1() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        boolean expected = false;
+        boolean actual = controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void controllerCoffeeMakerTest2() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        boolean expected = true;
+        boolean actual = controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void controllerCoffeeMakerTest3() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        controllerCoffeeMaker.intermittencePlateHeater();
+        boolean expected = false;
+        boolean actual = controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot();
+        Assert.assertEquals(expected, actual);
+    }
+//    @Test
+//    public void controllerCoffeeMakerTest3() {
+//        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+//        boolean expected = false;
+//        boolean actual = controllerCoffeeMaker.getCoffeeMaker().drinkOneCupCoffee();
+//        Assert.assertEquals(expected, actual);
+//    }
 }
