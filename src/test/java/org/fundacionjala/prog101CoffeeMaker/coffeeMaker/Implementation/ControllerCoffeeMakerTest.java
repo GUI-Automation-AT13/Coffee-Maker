@@ -133,11 +133,49 @@ public class ControllerCoffeeMakerTest {
         boolean actual = controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot();
         Assert.assertEquals(expected, actual);
     }
-//    @Test
-//    public void controllerCoffeeMakerTest3() {
-//        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
-//        boolean expected = false;
-//        boolean actual = controllerCoffeeMaker.getCoffeeMaker().drinkOneCupCoffee();
-//        Assert.assertEquals(expected, actual);
-//    }
+
+    @Test
+    public void controllerCoffeeMakerTest4() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.entryOption("1");
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getBoiler().getWorkingBoiler());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getFilterAndReceptacle().getCoffeeGrains());
+    }
+
+    @Test
+    public void controllerCoffeeMakerTest5() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.entryOption("2");
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getBoiler().getWorkingBoiler());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getFilterAndReceptacle().getCoffeeGrains());
+    }
+
+    @Test
+    public void controllerCoffeeMakerTest6() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.entryOption("3");
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getBoiler().getWorkingBoiler());
+        Assert.assertTrue(controllerCoffeeMaker.getCoffeeMaker().getFilterAndReceptacle().getCoffeeGrains());
+    }
+
+    @Test
+    public void controllerCoffeeMakerTest7() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.entryOption("4");
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getBoiler().getWorkingBoiler());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getFilterAndReceptacle().getCoffeeGrains());
+    }
+
+    @Test
+    public void controllerCoffeeMakerTest8() {
+        ControllerCoffeeMaker controllerCoffeeMaker = new ControllerCoffeeMaker();
+        controllerCoffeeMaker.entryOption("5");
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getPot().obtainWorkingPot());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getBoiler().getWorkingBoiler());
+        Assert.assertFalse(controllerCoffeeMaker.getCoffeeMaker().getFilterAndReceptacle().getCoffeeGrains());
+    }
 }
