@@ -1,11 +1,15 @@
 package org.fundacionjala.prog101CoffeeMaker.coffeeMaker.Implementation;
 
-import org.fundacionjala.prog101CoffeeMaker.coffeeMaker.Pot.Pot;
+import org.junit.Assert;
 import org.junit.Test;
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import static org.junit.Assert.assertEquals;
 
 public class OutputsTest {
+
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @Test
     public void formatColorGreen_StringColorGreen() {
@@ -16,6 +20,7 @@ public class OutputsTest {
         String actual = outputs.formatColorGreen("this text in color green");
         assertEquals(expected, actual);
     }
+
     @Test
     public void formatError_StringColorRed() {
         final String colorReset = "\u001B[0m";
@@ -25,6 +30,7 @@ public class OutputsTest {
         String actual = outputs.formatError("this text in color red");
         assertEquals(expected, actual);
     }
+
     @Test
     public void printHead_StringHead() {
         Outputs outputs = new Outputs();
@@ -35,6 +41,7 @@ public class OutputsTest {
         String actual = outputs.printHead();
         assertEquals(expected, actual);
     }
+
     @Test
     public void printInstructions_StringInstructions() {
         Outputs outputs = new Outputs();
@@ -49,5 +56,20 @@ public class OutputsTest {
         String expected = message1 + message2 + message3 + message4 + message5 + message6 + message7 + message8;
         String actual = outputs.instructions();
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void printTest() {
+        Outputs outputs = new Outputs();
+        String message = null;
+        outputs.print(message);
+    }
+
+    @Test
+    public void out() {
+        Outputs outputs = new Outputs();
+        System.setOut(new PrintStream(outputStreamCaptor));
+        outputs.print("hello");
+        Assert.assertEquals("hello", outputStreamCaptor.toString().trim());
     }
 }

@@ -12,12 +12,18 @@ public class Outputs {
     private final String colorCyan = "\u001B[36m";
     private final String colorWhite = "\u001B[37m";
     private String printForInterface = "";
+
     /**
      * Print method
+     *
      * @param message
      */
     public void print(final String message) {
-        System.out.println(message);
+        if (message.equals(null)) {
+            throw new NullPointerException();
+        } else {
+            System.out.println(message);
+        }
     }
 
     /**
@@ -29,6 +35,7 @@ public class Outputs {
 
     /**
      * String with all message for function
+     *
      * @return
      */
     public String printForInterface() {
@@ -38,6 +45,7 @@ public class Outputs {
 
     /**
      * Changed format for print error in color red
+     *
      * @param message
      */
     public String formatError(final String message) {
@@ -47,6 +55,7 @@ public class Outputs {
 
     /**
      * Changed format for print in color green
+     *
      * @param message
      */
     public String formatColorGreen(final String message) {
@@ -56,6 +65,7 @@ public class Outputs {
 
     /**
      * Changed format for print in color yellow
+     *
      * @param message
      */
     public String formatColorYellow(final String message) {
