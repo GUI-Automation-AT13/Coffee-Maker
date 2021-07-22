@@ -10,8 +10,13 @@ import org.fundacionjala.prog101CoffeeMaker.coffeeMaker.Pot.Pot;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class CoffeeMakerTest {
 
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @Test
     public void removePot() {
@@ -270,6 +275,51 @@ public class CoffeeMakerTest {
         coffeeMaker.returnPotToPlateHeater(outputs);
         boolean expected = false;
         boolean actual = plateSensor.obtainStatePlate();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkBoilerWorking() {
+        CoffeeMaker coffeeMaker = new CoffeeMaker();
+        Outputs outputs = new Outputs();
+        coffeeMaker.boilerOn(outputs);
+        boolean expected = true;
+        boolean actual = coffeeMaker.getBoiler().getWorkingBoiler();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkBoilerNotWorking() {
+        CoffeeMaker coffeeMaker = new CoffeeMaker();
+        Outputs outputs = new Outputs();
+        coffeeMaker.boilerOn(outputs);
+        coffeeMaker.boilerOff(outputs);
+        boolean expected = false;
+        boolean actual = coffeeMaker.getBoiler().getWorkingBoiler();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void drinkCoffeeWithZeroCups() {
+        CoffeeMaker coffeeMaker = new CoffeeMaker();
+        Outputs outputs = new Outputs();
+        coffeeMaker.drinkOneCupCoffee(outputs);
+        boolean expected = false;
+        boolean actual = coffeeMaker.drinkOneCupCoffee(outputs);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void drinkCoffee() {
+        CoffeeMaker coffeeMaker = new CoffeeMaker();
+        Outputs outputs = new Outputs();
+        coffeeMaker.boilerOn(outputs);
+        coffeeMaker.loadWater(outputs, 5);
+        coffeeMaker.makingCoffee(outputs);
+        coffeeMaker.makingCoffee(outputs);
+
+        boolean expected = true;
+        boolean actual = coffeeMaker.drinkOneCupCoffee(outputs);
         Assert.assertEquals(expected, actual);
     }
 
