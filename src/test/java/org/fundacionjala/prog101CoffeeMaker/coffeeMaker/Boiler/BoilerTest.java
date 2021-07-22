@@ -81,4 +81,15 @@ public class BoilerTest {
         boolean actual = boiler.getWorkingBoiler();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void restCupToZeroCups() {
+        Boiler boiler = new Boiler();
+        boiler.setCupsOfWater(1);
+        boiler.restOneCup();
+        boiler.restOneCup();
+        boolean expected = false;
+        boolean actual = boiler.containLiquid();
+        Assert.assertEquals(expected, actual);
+    }
 }
